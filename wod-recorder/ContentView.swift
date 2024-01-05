@@ -28,8 +28,7 @@ struct ContentView: View {
                         SetupView()
                             .navigationTitle("New Recording") .navigationBarTitleDisplayMode(.large)
                     } else {
-                        RecorderView()
-                            .navigationTitle("Camera") .navigationBarTitleDisplayMode(.large)
+                        RecorderView().navigationBarHidden(true)
                     }
                 }
                 Spacer()

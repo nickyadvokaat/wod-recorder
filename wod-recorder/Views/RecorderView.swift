@@ -37,8 +37,39 @@ struct RecorderView: View {
     }
 
     var body: some View {
-        VStack {
+        ZStack {
             VideoView()
+            VStack {
+                
+                Text("14:48")
+                    .font(.system(size: 72))
+                    .foregroundColor(Color.white)
+                    .frame(width: 200.0, height: 100.0)
+                    .background(Color(.systemGroupedBackground).opacity(0.5))
+                    .cornerRadius(15)
+                    .padding(.top, 50)
+                
+                Spacer()
+                HStack {
+                    Button {
+                    } label: {
+                        Label("Start Video", systemImage: "video")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    Button {
+                    } label: {
+                        Label("Start Timer", systemImage: "stopwatch")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .tint(Color(.systemRed))
+                    .disabled(true)
+                }
+                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            }
         }
     }
     

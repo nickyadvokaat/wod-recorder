@@ -8,30 +8,41 @@
 import SwiftUI
 
 struct SetupView: View {
-    @State private var username: String = ""
+    @State private var username: String
+    @State private var workout: String = ""
+    
     @State private var favoriteColor = 0
+    
+    @FocusState private var focusedField: FocusedField?
 
-    var workoutName = ""
+    
+    enum FocusedField {
+        case username, workout
+    }
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor( Color.accentColor)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         
+        _username = State(initialValue: (UserDefaults.standard.object(forKey:"username") as? String ?? ""))
     }
     
     var body: some View {
         VStack{
             Form {
                 Section {
-                    TextField("Athlete name...", text: $username)
+                    TextField("Athlete name...", text: $username).onChange(of: username) {
+                        UserDefaults.standard.set(username, forKey: "username")
+                    }.focused($focusedField, equals: .username)
                 } header: {
                     Text("Athlete name")
                 } footer: {
-                    Text("Athlete name is required").foregroundStyle(Color(.systemRed))
+                    Text("Athlete name is required")
+                        .foregroundStyle(Color(.systemRed))
                 }
                 
                 Section {
-                    TextField("Workout title...", text: $username)
+                    TextField("Workout title...", text: $workout)
                 } header: {
                     Text("Workout")
                 }
@@ -60,6 +71,8 @@ struct SetupView: View {
                 } header: {
                     Text("Time")
                 }
+            }.onAppear {
+                focusedField = .username
             }
             
             VStack {
@@ -71,21 +84,12 @@ struct SetupView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
-                
-//                NavigationLink {
-//                    
-//                    RecorderView()
-//                } label: {
-//                    
-//                    VStack {
-//                        
-//                        Text("Ready")
-//                    }
-//                    
-//                }.navigationTitle("Setup")
             }
             .padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
         }.background(Color(.systemGroupedBackground))
+            .onAppear {
+                        focusedField = .username
+                    }
     }
 }
 

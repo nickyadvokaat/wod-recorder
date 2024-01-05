@@ -56,8 +56,9 @@ final class VideoViewController: UIViewController, AVCaptureMetadataOutputObject
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        //previewLayer.frame = view.layer.bounds
-        previewLayer.frame = CGRect(x: 20, y: 60, width: 335, height: 200)
+        previewLayer.frame = view.layer.bounds
+        
+//        previewLayer.frame = CGRect(x: 20, y: 60, width: 335, height: 200)
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 

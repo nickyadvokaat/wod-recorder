@@ -106,6 +106,7 @@
 				9600C2AE2B45C41A0045B3C8 /* Info.plist */,
 				9600C2A52B45AF890045B3C8 /* Views */,
 				9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */,
+				9600C2B32B4880AE0045B3C8 /* Models */,
 				9600C2B12B4862350045B3C8 /* Router.swift */,
 				9600C27B2B45AABA0045B3C8 /* ContentView.swift */,
 				9600C27F2B45AABB0045B3C8 /* Assets.xcassets */,
@@ -147,6 +148,13 @@
 				9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9600C2B32B4880AE0045B3C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
