@@ -10,52 +10,36 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @StateObject var router = Router.shared
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        NavigationStack(path: $router.path) {
+            VStack {
+                Button {
+                    Router.shared.path.append("Setup")
+                } label: {
+                    Label("New Recording", systemImage: "video")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .navigationDestination(for: String.self) { route in
+                    if(route == "Setup"){
+                        SetupView()
+                            .navigationTitle("New Recording") .navigationBarTitleDisplayMode(.large)
+                    } else {
+                        RecorderView()
+                            .navigationTitle("Camera") .navigationBarTitleDisplayMode(.large)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                Spacer()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .navigationBarTitle(Text("WOD Recorder"))
+        }.frame(maxWidth: .infinity)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

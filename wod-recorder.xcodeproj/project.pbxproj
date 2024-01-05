@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		9600C27A2B45AABA0045B3C8 /* wod_recorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */; };
 		9600C27C2B45AABA0045B3C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C27B2B45AABA0045B3C8 /* ContentView.swift */; };
-		9600C27E2B45AABA0045B3C8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C27D2B45AABA0045B3C8 /* Item.swift */; };
 		9600C2802B45AABB0045B3C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9600C27F2B45AABB0045B3C8 /* Assets.xcassets */; };
 		9600C2832B45AABB0045B3C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9600C2822B45AABB0045B3C8 /* Preview Assets.xcassets */; };
 		9600C28D2B45AABB0045B3C8 /* wod_recorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C28C2B45AABB0045B3C8 /* wod_recorderTests.swift */; };
 		9600C2972B45AABB0045B3C8 /* wod_recorderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2962B45AABB0045B3C8 /* wod_recorderUITests.swift */; };
 		9600C2992B45AABB0045B3C8 /* wod_recorderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2982B45AABB0045B3C8 /* wod_recorderUITestsLaunchTests.swift */; };
+		9600C2AC2B45BBC80045B3C8 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AA2B45BBC80045B3C8 /* RecorderView.swift */; };
+		9600C2AD2B45BBC80045B3C8 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AB2B45BBC80045B3C8 /* SetupView.swift */; };
+		9600C2B02B45D4660045B3C8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */; };
+		9600C2B22B4862350045B3C8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2B12B4862350045B3C8 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,6 @@
 		9600C2762B45AABA0045B3C8 /* wod-recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wod-recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wod_recorderApp.swift; sourceTree = "<group>"; };
 		9600C27B2B45AABA0045B3C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		9600C27D2B45AABA0045B3C8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9600C27F2B45AABB0045B3C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9600C2822B45AABB0045B3C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9600C2882B45AABB0045B3C8 /* wod-recorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "wod-recorderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,11 @@
 		9600C2922B45AABB0045B3C8 /* wod-recorderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "wod-recorderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9600C2962B45AABB0045B3C8 /* wod_recorderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wod_recorderUITests.swift; sourceTree = "<group>"; };
 		9600C2982B45AABB0045B3C8 /* wod_recorderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wod_recorderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9600C2AA2B45BBC80045B3C8 /* RecorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
+		9600C2AB2B45BBC80045B3C8 /* SetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		9600C2AE2B45C41A0045B3C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		9600C2B12B4862350045B3C8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +103,11 @@
 		9600C2782B45AABA0045B3C8 /* wod-recorder */ = {
 			isa = PBXGroup;
 			children = (
+				9600C2AE2B45C41A0045B3C8 /* Info.plist */,
+				9600C2A52B45AF890045B3C8 /* Views */,
 				9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */,
+				9600C2B12B4862350045B3C8 /* Router.swift */,
 				9600C27B2B45AABA0045B3C8 /* ContentView.swift */,
-				9600C27D2B45AABA0045B3C8 /* Item.swift */,
 				9600C27F2B45AABB0045B3C8 /* Assets.xcassets */,
 				9600C2812B45AABB0045B3C8 /* Preview Content */,
 			);
@@ -128,6 +137,16 @@
 				9600C2982B45AABB0045B3C8 /* wod_recorderUITestsLaunchTests.swift */,
 			);
 			path = "wod-recorderUITests";
+			sourceTree = "<group>";
+		};
+		9600C2A52B45AF890045B3C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9600C2AA2B45BBC80045B3C8 /* RecorderView.swift */,
+				9600C2AB2B45BBC80045B3C8 /* SetupView.swift */,
+				9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +280,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9600C27C2B45AABA0045B3C8 /* ContentView.swift in Sources */,
-				9600C27E2B45AABA0045B3C8 /* Item.swift in Sources */,
+				9600C2B02B45D4660045B3C8 /* VideoViewController.swift in Sources */,
+				9600C2B22B4862350045B3C8 /* Router.swift in Sources */,
+				9600C2AC2B45BBC80045B3C8 /* RecorderView.swift in Sources */,
+				9600C2AD2B45BBC80045B3C8 /* SetupView.swift in Sources */,
 				9600C27A2B45AABA0045B3C8 /* wod_recorderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,13 +448,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wod-recorder/Preview Content\"";
+				DEVELOPMENT_TEAM = 97RHCTNC95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "wod-recorder/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WOD Recorder";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera permission is required to record a WOD";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Camera permission is required to record a WOD";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,13 +482,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wod-recorder/Preview Content\"";
+				DEVELOPMENT_TEAM = 97RHCTNC95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "wod-recorder/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WOD Recorder";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera permission is required to record a WOD";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Camera permission is required to record a WOD";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
