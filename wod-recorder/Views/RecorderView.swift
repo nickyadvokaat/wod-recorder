@@ -1,10 +1,3 @@
-//
-//  RecorderView.swift
-//  wod-recorder
-//
-//  Created by Nicky Advokaat on 03/01/2024.
-//
-
 import SwiftUI
 import AVKit
 

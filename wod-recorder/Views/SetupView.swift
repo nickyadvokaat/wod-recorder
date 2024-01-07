@@ -1,17 +1,11 @@
-//
-//  SetupView.swift
-//  wod-recorder
-//
-//  Created by Nicky Advokaat on 03/01/2024.
-//
-
 import SwiftUI
 
 struct SetupView: View {
     @State private var username: String
     @State private var workout: String = ""
-    
-    @State private var favoriteColor = 0
+    @State private var workoutType = 0
+    @State private var minutes = "0"
+    @State private var seconds = "0"
     
     @FocusState private var focusedField: FocusedField?
 
@@ -48,7 +42,7 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    Picker("Workout type", selection: $favoriteColor) {
+                    Picker("Workout type", selection: $workoutType) {
                         Text("AMRAP").tag(0)
                         Text("For Time").tag(1)
                     }
@@ -58,16 +52,16 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    LabeledContent(
-                        "Minutes",
-                        value: 5.0,
-                        format: .number.precision(.fractionLength(0))
-                    )
-                    LabeledContent(
-                        "Seconds",
-                        value: 0.0,
-                        format: .number.precision(.fractionLength(0))
-                    )
+                    LabeledContent {
+                        TextField("0", value: $minutes, formatter: NumberFormatter()).keyboardType(.numberPad).multilineTextAlignment(.trailing)
+                    } label: {
+                        Text("Minutes")
+                    }
+                    LabeledContent {
+                        TextField("0", value: $seconds, formatter: NumberFormatter()).keyboardType(.numberPad).multilineTextAlignment(.trailing)
+                    } label: {
+                        Text("Seconds")
+                    }
                 } header: {
                     Text("Time")
                 }
