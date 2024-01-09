@@ -5,111 +5,165 @@ import SwiftUI
 struct VideoView: UIViewControllerRepresentable {
     typealias UIViewControllerType = VideoViewController
     
+    let vc: VideoViewController? = VideoViewController()
+    
     func makeUIViewController(context: Context) -> VideoViewController {
-        let vc = VideoViewController()
-        // Do some configurations here if needed.
-        return vc
+        if let vc = vc {
+            return vc
+        }
+        return VideoViewController()
     }
     
     func updateUIViewController(_ uiViewController: VideoViewController, context: Context) {
         // Updates the state of the specified view controller with new information from SwiftUI.
     }
+    
+    func startVideoButtonTapped() {
+        vc?.startVideoRecording()
+    }
 }
 
-final class VideoViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-    var captureSession: AVCaptureSession!
+final class VideoViewController: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!
-
+//    var videoManager: VideoManager!
+    
+    
+    var captureSession = AVCaptureSession()
+    
+    var videoSession: AVCaptureSession!
+    var videoDataOutput = AVCaptureVideoDataOutput()
+    var dataOutputQueue = DispatchQueue(label: "nl.nickyadvokaat.wod-recorder")
+    var assetWriter: AVAssetWriter!
+    var assetWriterInput: AVAssetWriterInput!
+    
+    var isWriting = false
+    var sessionAtSourceTime: CMTime?
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.backgroundColor = UIColor.blue
-        captureSession = AVCaptureSession()
+        print("view did load")
 
+        setup()
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+    }
+    
+    func startVideoRecording() {
+        stop()
+    }
+}
+
+extension VideoViewController {
+    func setup() {
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
-
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
             return
         }
-
+        
+        captureSession.beginConfiguration()
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
             failed()
             return
         }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr, .ean13, .code128]
-
-        } else {
-            failed()
-            return
-        }
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+      
+        setUpAssetWriter()
         
-//        previewLayer.frame = CGRect(x: 20, y: 60, width: 335, height: 200)
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.commitConfiguration()
+            self.captureSession.startRunning()
+        }
     }
-
+    
+    func setUpAssetWriter() {
+        do {
+            videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+            videoDataOutput.alwaysDiscardsLateVideoFrames = true
+            videoDataOutput.setSampleBufferDelegate(self, queue: dataOutputQueue)
+            guard captureSession.canAddOutput(videoDataOutput) else { fatalError() }
+            captureSession.addOutput(videoDataOutput)
+           
+            let outputFileLocation = videoFileLocation()
+            assetWriter = try AVAssetWriter(outputURL: outputFileLocation, fileType: AVFileType.mp4)
+            assetWriterInput = AVAssetWriterInput(mediaType: .video, outputSettings: videoDataOutput.recommendedVideoSettingsForAssetWriter(writingTo: .mp4))
+            assetWriterInput.expectsMediaDataInRealTime = true
+            
+            if assetWriter.canAdd(assetWriterInput) {
+                assetWriter.add(assetWriterInput)
+                print("video input added")
+            } else {
+                print("no input added")
+            }
+            
+            isWriting = true
+            assetWriter.startWriting()
+        } catch let error {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
     func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-        captureSession = nil
+        print("failed")
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
+    
+    func videoFileLocation() -> URL {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let videoOutputUrl = URL(fileURLWithPath: documentsPath.appendingPathComponent("videoFile")).appendingPathExtension("mp4")
+        do {
+            if FileManager.default.fileExists(atPath: videoOutputUrl.path) {
+                try FileManager.default.removeItem(at: videoOutputUrl)
+                print("file removed")
+            }
+        } catch {
+            print(error)
         }
+        
+        return videoOutputUrl
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
+    
+    func stop() {
+        isWriting = false
+        assetWriterInput.markAsFinished()
+        assetWriter.finishWriting {
+            self.testPrint()
         }
+        print("marked as finished")
+        
     }
+    
+    func testPrint() {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let videoOutputUrl = URL(fileURLWithPath: documentsPath.appendingPathComponent("videoFile")).appendingPathExtension("mp4")
+        print(videoOutputUrl)
+        let asset = AVAsset(url: videoOutputUrl)
+        print("Meta:")
+        print(asset.metadata)
+        print(asset.duration)
+        print(".")
+    }
+}
 
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
-
-        if let metadataObject = metadataObjects.first {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
+extension VideoViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        if !isWriting {return}
+        
+        if sessionAtSourceTime == nil {
+            sessionAtSourceTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+            assetWriter.startSession(atSourceTime: sessionAtSourceTime!)
+            print("Writing")
         }
-
-        dismiss(animated: true)
-    }
-
-    func found(code: String) {
-        print(code)
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        
+        if(output === videoDataOutput && assetWriterInput.isReadyForMoreMediaData) {
+            assetWriterInput.append(sampleBuffer)
+        }
     }
 }
