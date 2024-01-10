@@ -3,6 +3,8 @@ import AVKit
 
 struct RecorderView: View {
         
+    @State private var isRecording = false
+
     let videoView = VideoView()
     
     var body: some View {
@@ -29,9 +31,10 @@ struct RecorderView: View {
                 Spacer()
                 HStack {
                     Button {
-                        videoView.startVideoButtonTapped()
+                        isRecording = !isRecording
+                        isRecording ? videoView.stopVideoButtonTapped() : videoView.startVideoButtonTapped()
                     } label: {
-                        Label("Start Video", systemImage: "video")
+                        Label(isRecording ? "Stop Video" : "Start Video", systemImage: "video")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)

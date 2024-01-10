@@ -1,9 +1,18 @@
 import SwiftUI
+import AVKit
+import AVFoundation
 import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject var router = Router.shared
+
+    var videoOutputUrl: URL!
+
+    init() {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        videoOutputUrl = URL(fileURLWithPath: documentsPath.appendingPathComponent("videoFile")).appendingPathExtension("mp4")
+    }
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -24,6 +33,8 @@ struct ContentView: View {
                         RecorderView().navigationBarHidden(true)
                     }
                 }
+                VideoPlayer(player: AVPlayer(url:  videoOutputUrl))
+                    .frame(maxHeight: .infinity)
                 Spacer()
             }
             .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)

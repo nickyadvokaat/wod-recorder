@@ -18,6 +18,7 @@
 		9600C2AD2B45BBC80045B3C8 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AB2B45BBC80045B3C8 /* SetupView.swift */; };
 		9600C2B02B45D4660045B3C8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */; };
 		9600C2B22B4862350045B3C8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2B12B4862350045B3C8 /* Router.swift */; };
+		963052792B4DC79400C40FDC /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963052782B4DC79400C40FDC /* VideoManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		9600C2AE2B45C41A0045B3C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9600C2B12B4862350045B3C8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		963052782B4DC79400C40FDC /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		9600C2782B45AABA0045B3C8 /* wod-recorder */ = {
 			isa = PBXGroup;
 			children = (
+				963052772B4DC78100C40FDC /* Classes */,
 				9600C2AE2B45C41A0045B3C8 /* Info.plist */,
 				9600C2A52B45AF890045B3C8 /* Views */,
 				9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */,
@@ -155,6 +158,14 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		963052772B4DC78100C40FDC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				963052782B4DC79400C40FDC /* VideoManager.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +301,7 @@
 				9600C27C2B45AABA0045B3C8 /* ContentView.swift in Sources */,
 				9600C2B02B45D4660045B3C8 /* VideoViewController.swift in Sources */,
 				9600C2B22B4862350045B3C8 /* Router.swift in Sources */,
+				963052792B4DC79400C40FDC /* VideoManager.swift in Sources */,
 				9600C2AC2B45BBC80045B3C8 /* RecorderView.swift in Sources */,
 				9600C2AD2B45BBC80045B3C8 /* SetupView.swift in Sources */,
 				9600C27A2B45AABA0045B3C8 /* wod_recorderApp.swift in Sources */,
@@ -466,8 +478,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -500,8 +511,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

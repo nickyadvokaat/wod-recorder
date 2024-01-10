@@ -21,6 +21,10 @@ struct VideoView: UIViewControllerRepresentable {
     func startVideoButtonTapped() {
         vc?.startVideoRecording()
     }
+    
+    func stopVideoButtonTapped() {
+        vc?.stopVideoRecording()
+    }
 }
 
 final class VideoViewController: UIViewController {
@@ -53,6 +57,10 @@ final class VideoViewController: UIViewController {
     }
     
     func startVideoRecording() {
+        // TODO
+    }
+    
+    func stopVideoRecording() {
         stop()
     }
 }
@@ -88,6 +96,7 @@ extension VideoViewController {
             videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
             videoDataOutput.alwaysDiscardsLateVideoFrames = true
             videoDataOutput.setSampleBufferDelegate(self, queue: dataOutputQueue)
+            let videoDataOuputConnection = videoDataOutput.connection(with: .video)
             guard captureSession.canAddOutput(videoDataOutput) else { fatalError() }
             captureSession.addOutput(videoDataOutput)
            
@@ -95,7 +104,7 @@ extension VideoViewController {
             assetWriter = try AVAssetWriter(outputURL: outputFileLocation, fileType: AVFileType.mp4)
             assetWriterInput = AVAssetWriterInput(mediaType: .video, outputSettings: videoDataOutput.recommendedVideoSettingsForAssetWriter(writingTo: .mp4))
             assetWriterInput.expectsMediaDataInRealTime = true
-            
+            assetWriterInput.transform = CGAffineTransform(rotationAngle: CGFloat(CGFloat.pi / 2.0))
             if assetWriter.canAdd(assetWriterInput) {
                 assetWriter.add(assetWriterInput)
                 print("video input added")
@@ -129,25 +138,17 @@ extension VideoViewController {
         return videoOutputUrl
     }
     
+    func start() {
+        isWriting = true
+        assetWriter.startWriting()
+    }
+    
     func stop() {
         isWriting = false
         assetWriterInput.markAsFinished()
         assetWriter.finishWriting {
-            self.testPrint()
         }
         print("marked as finished")
-        
-    }
-    
-    func testPrint() {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        let videoOutputUrl = URL(fileURLWithPath: documentsPath.appendingPathComponent("videoFile")).appendingPathExtension("mp4")
-        print(videoOutputUrl)
-        let asset = AVAsset(url: videoOutputUrl)
-        print("Meta:")
-        print(asset.metadata)
-        print(asset.duration)
-        print(".")
     }
 }
 
@@ -155,7 +156,6 @@ extension VideoViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if !isWriting {return}
-        
         if sessionAtSourceTime == nil {
             sessionAtSourceTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
             assetWriter.startSession(atSourceTime: sessionAtSourceTime!)
