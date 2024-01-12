@@ -1,8 +1,9 @@
 import SwiftUI
+import RealmSwift
 
 struct SetupView: View {
-    @State private var username: String
-    @State private var workout: String = ""
+    @State private var athleteName: String
+    @State private var workoutTitle: String = ""
     @State private var workoutType = 0
     @State private var minutes = "0"
     @State private var seconds = "0"
@@ -18,15 +19,15 @@ struct SetupView: View {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor( Color.accentColor)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         
-        _username = State(initialValue: (UserDefaults.standard.object(forKey:"username") as? String ?? ""))
+        _athleteName = State(initialValue: (UserDefaults.standard.object(forKey:"username") as? String ?? ""))
     }
     
     var body: some View {
         VStack{
             Form {
                 Section {
-                    TextField("Athlete name...", text: $username).onChange(of: username) {
-                        UserDefaults.standard.set(username, forKey: "username")
+                    TextField("Athlete name...", text: $athleteName).onChange(of: athleteName) {
+                        UserDefaults.standard.set(athleteName, forKey: "username")
                     }.focused($focusedField, equals: .username)
                 } header: {
                     Text("Athlete name")
@@ -36,7 +37,7 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    TextField("Workout title...", text: $workout)
+                    TextField("Workout title...", text: $workoutTitle)
                 } header: {
                     Text("Workout")
                 }
@@ -71,7 +72,16 @@ struct SetupView: View {
             
             VStack {
                 Button {
-                    Router.shared.path.append("Recorder")
+                    do {
+                        let rec = Recording(athleteName: athleteName, workoutTitle: workoutTitle)
+                        let realm = try Realm()
+                        try realm.write {
+                            realm.add(rec)
+                        }
+                        Router.shared.path.append("Recorder")
+                    } catch {
+                        print("Failed to create Recording")
+                    }
                 } label: {
                     Text("Ready")
                         .frame(maxWidth: .infinity)

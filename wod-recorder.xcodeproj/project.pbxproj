@@ -19,6 +19,9 @@
 		9600C2B02B45D4660045B3C8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */; };
 		9600C2B22B4862350045B3C8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600C2B12B4862350045B3C8 /* Router.swift */; };
 		963052792B4DC79400C40FDC /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963052782B4DC79400C40FDC /* VideoManager.swift */; };
+		969A22022B4F314B00F9502D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 969A22012B4F314B00F9502D /* Realm */; };
+		969A22042B4F314B00F9502D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 969A22032B4F314B00F9502D /* RealmSwift */; };
+		969A22062B4F319300F9502D /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A22052B4F319300F9502D /* Recording.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +54,11 @@
 		9600C2982B45AABB0045B3C8 /* wod_recorderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wod_recorderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9600C2AA2B45BBC80045B3C8 /* RecorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		9600C2AB2B45BBC80045B3C8 /* SetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
-		9600C2AE2B45C41A0045B3C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9600C2AE2B45C41A0045B3C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9600C2AF2B45D4660045B3C8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9600C2B12B4862350045B3C8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		963052782B4DC79400C40FDC /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		969A22052B4F319300F9502D /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969A22042B4F314B00F9502D /* RealmSwift in Frameworks */,
+				969A22022B4F314B00F9502D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,15 +111,15 @@
 		9600C2782B45AABA0045B3C8 /* wod-recorder */ = {
 			isa = PBXGroup;
 			children = (
-				963052772B4DC78100C40FDC /* Classes */,
-				9600C2AE2B45C41A0045B3C8 /* Info.plist */,
-				9600C2A52B45AF890045B3C8 /* Views */,
-				9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */,
-				9600C2B32B4880AE0045B3C8 /* Models */,
-				9600C2B12B4862350045B3C8 /* Router.swift */,
 				9600C27B2B45AABA0045B3C8 /* ContentView.swift */,
+				9600C2B12B4862350045B3C8 /* Router.swift */,
+				9600C2792B45AABA0045B3C8 /* wod_recorderApp.swift */,
 				9600C27F2B45AABB0045B3C8 /* Assets.xcassets */,
+				9600C2AE2B45C41A0045B3C8 /* Info.plist */,
+				963052772B4DC78100C40FDC /* Classes */,
+				9600C2B32B4880AE0045B3C8 /* Models */,
 				9600C2812B45AABB0045B3C8 /* Preview Content */,
+				9600C2A52B45AF890045B3C8 /* Views */,
 			);
 			path = "wod-recorder";
 			sourceTree = "<group>";
@@ -156,6 +162,7 @@
 		9600C2B32B4880AE0045B3C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				969A22052B4F319300F9502D /* Recording.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +191,10 @@
 			dependencies = (
 			);
 			name = "wod-recorder";
+			packageProductDependencies = (
+				969A22012B4F314B00F9502D /* Realm */,
+				969A22032B4F314B00F9502D /* RealmSwift */,
+			);
 			productName = "wod-recorder";
 			productReference = 9600C2762B45AABA0045B3C8 /* wod-recorder.app */;
 			productType = "com.apple.product-type.application";
@@ -256,6 +267,9 @@
 				Base,
 			);
 			mainGroup = 9600C26D2B45AABA0045B3C8;
+			packageReferences = (
+				969A22002B4F314B00F9502D /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 9600C2772B45AABA0045B3C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -305,6 +319,7 @@
 				9600C2AC2B45BBC80045B3C8 /* RecorderView.swift in Sources */,
 				9600C2AD2B45BBC80045B3C8 /* SetupView.swift in Sources */,
 				9600C27A2B45AABA0045B3C8 /* wod_recorderApp.swift in Sources */,
+				969A22062B4F319300F9502D /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +653,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		969A22002B4F314B00F9502D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		969A22012B4F314B00F9502D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 969A22002B4F314B00F9502D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		969A22032B4F314B00F9502D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 969A22002B4F314B00F9502D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9600C26E2B45AABA0045B3C8 /* Project object */;
 }
